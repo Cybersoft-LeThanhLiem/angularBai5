@@ -14,7 +14,10 @@
 				<a class="nav-link" href="#">Pricing</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Login</a>
+				<a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" *ngIf="name == null; else loggedIn">Login</a>
+				<ng-template #loggedIn>
+					<a class="nav-link" href="#">{{name}}</a>
+				</ng-template>
 			</li>
 		</ul>
 	</div>
@@ -32,16 +35,16 @@
 			<form>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Email address</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+						<label>Username</label>
+						<input type="text" class="form-control" #username>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label>
-						<input type="password" class="form-control" id="exampleInputPassword1">
+						<label>Password</label>
+						<input type="password" class="form-control" #password>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success">Login</button>
+					<button type="submit" class="btn btn-success" (click)="login(username.value, password.value)">Login</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
 			</form>
